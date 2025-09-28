@@ -1,4 +1,3 @@
-import { redirect, RedirectType } from 'next/navigation';
 import type { NextRequest } from 'next/server';
 
 import { db } from '@/lib/db';
@@ -28,5 +27,5 @@ export async function GET(
 		})
 		.where(eq(linksTable.link_id, id));
 
-	redirect(url, RedirectType.replace);
+	return Response.redirect(url, 307);
 }
