@@ -13,22 +13,31 @@ export default function Form() {
 			return toast.error('Please enter a valid URL');
 		}
 
-		const body = JSON.stringify(url);
-		const res = await fetch('/p', {
-			method: 'POST',
-			body: body,
+		const body = JSON.stringify({
+			url: url,
 		});
 
-		const short_id = await res.json();
-		console.log(short_id);
-		const base_url = process.env.NEXT_PUBLIC_BASE_URL;
-		if (!base_url) {
-			return toast.error('No base URL set');
-		}
-		const shortned_url = `${base_url}/p/${short_id.id}`;
-		if (shortned_url) {
-			await navigator.clipboard.writeText(shortned_url);
-			toast.success('Shortened URL copied to clipboard!');
+		try {
+			const res = await fetch('/p', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: body,
+			});
+
+			const { id, url } = await res.json();
+			const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+			const shortned_url = `${base_url}/p/${id}`;
+
+			const target_url = url.split('/', 3);
+
+			if (shortned_url) {
+				await navigator.clipboard.writeText(shortned_url);
+				toast.success(`Shortened URL for ${target_url.join('/')} copied to clipboard!`);
+			}
+		} catch (e) {
+			toast.error('Something bad happend :(( please try again later');
 		}
 	}
 	return (
