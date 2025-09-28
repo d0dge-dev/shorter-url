@@ -19,6 +19,12 @@ export const metadata: Metadata = {
 	description: 'Test Project for URL Shortener',
 };
 
+/**
+ * Application root layout that applies global fonts, theme provider, and renders page content with a toast container.
+ *
+ * @param children - The page content to render inside the themed layout.
+ * @returns The root HTML structure (html > body) with fonts, theme provider, rendered children, and a Toaster.
+ */
 export default function RootLayout({
 	children,
 }: Readonly<{

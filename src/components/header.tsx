@@ -1,3 +1,8 @@
+/**
+ * Renders the header section for the URL shortener UI.
+ *
+ * @returns A JSX element containing a centered main title "URL Shortener" and a centered subtitle "Shorten your URL now".
+ */
 export default function Header() {
 	return (
 		<div>

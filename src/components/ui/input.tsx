@@ -2,6 +2,12 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Render a styled input element that forwards native input props.
+ *
+ * @param className - Additional CSS class names to merge with the component's predefined styling
+ * @returns A JSX `<input>` element with the component's base styles applied, merged `className`, and all other props forwarded
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

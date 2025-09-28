@@ -4,6 +4,16 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+/**
+ * Renders a URL shortening form with client-side validation and copy-to-clipboard feedback.
+ *
+ * The component provides an input that validates the entered value as a URL while typing.
+ * When the button is clicked it sends the URL to the server, constructs a shortened link
+ * using `NEXT_PUBLIC_BASE_URL`, copies the shortened link to the clipboard, and shows
+ * success or error toasts for validation or configuration issues.
+ *
+ * @returns A React element containing a URL input and a "Short now!" button that triggers the shortening flow.
+ */
 export default function Form() {
 	const [url, setURLtoShorten] = useState('');
 	const [isURLvalid, setValid] = useState(false);
