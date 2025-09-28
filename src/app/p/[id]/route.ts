@@ -21,5 +21,12 @@ export async function GET(
 
 	const url = link_data[0].link_url;
 
+	await db
+		.update(linksTable)
+		.set({
+			view_count: link_data[0].view_count + 1,
+		})
+		.where(eq(linksTable.link_id, id));
+
 	redirect(url, RedirectType.replace);
 }
