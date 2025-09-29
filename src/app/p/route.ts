@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
 }
 
 async function insertLink(url: string, attempt: number = 1): Promise<string | Error> {
-	if (attempt <= 5) return Error('Could not generate uniquie ID');
+	if (attempt >= 5) return Error('Could not generate unique ID');
 
 	try {
 		const id = nanoid(7);
@@ -72,7 +72,7 @@ async function insertLink(url: string, attempt: number = 1): Promise<string | Er
 		return id;
 	} catch (e: any) {
 		if (e.cause.code == '23505') {
-			return insertLink(url, attempt++);
+			return insertLink(url, attempt + 1);
 		} else {
 			return Error('Database Error', e.cause);
 		}
