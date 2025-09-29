@@ -4,11 +4,10 @@ import Link from 'next/link';
 
 export default function Home() {
 	return (
+		// Lowkey AI generated 💀
 		<main className="relative min-h-[calc(100dvh-0px)] overflow-hidden">
-			{/* Gradient background */}
 			<div className="pointer-events-none absolute inset-0 -z-10">
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,theme(colors.primary)/15%,transparent_60%),radial-gradient(circle_at_80%_30%,theme(colors.secondary)/20%,transparent_65%),linear-gradient(135deg,theme(colors.background),theme(colors.secondary)/30%)] dark:bg-[radial-gradient(circle_at_20%_20%,theme(colors.primary)/25%,transparent_60%),radial-gradient(circle_at_80%_30%,theme(colors.secondary)/35%,transparent_65%),linear-gradient(135deg,oklch(.13_.028_261.692),oklch(.21_.034_264.665)/40%)]" />
-				{/* Blurred orbs */}
 				<div className="absolute left-1/2 top-1/2 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl animate-pulse" />
 				<div className="absolute left-[15%] top-[25%] size-72 rounded-full bg-secondary/20 blur-2xl animate-[pulse_9s_ease-in-out_infinite]" />
 				<div className="absolute right-[10%] top-[40%] size-80 rounded-full bg-primary/20 blur-2xl opacity-70 animate-[pulse_11s_ease-in-out_infinite]" />
@@ -56,7 +55,7 @@ export default function Home() {
 				<footer className="mt-16 mb-8 text-xs text-muted-foreground/70">
 					<span>
 						Built with Next.js & Drizzle •{' '}
-						<Link href="https://github.com/d0dge-dev/url-shortener" target="_blank">
+						<Link href="https://github.com/d0dge-dev/shorter-url" target="_blank">
 							View on Github
 						</Link>
 					</span>
