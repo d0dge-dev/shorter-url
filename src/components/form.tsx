@@ -26,6 +26,10 @@ export default function Form() {
 				body: body,
 			});
 
+			if (!res.ok) {
+				throw Error(await res.text());
+			}
+
 			const { id, url } = await res.json();
 			const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 			const shortned_url = `${base_url}/p/${id}`;
@@ -36,8 +40,8 @@ export default function Form() {
 				await navigator.clipboard.writeText(shortned_url);
 				toast.success(`Shortened URL for ${target_url.join('/')} copied to clipboard!`);
 			}
-		} catch (e) {
-			toast.error('Something bad happend :(( please try again later');
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 	return (

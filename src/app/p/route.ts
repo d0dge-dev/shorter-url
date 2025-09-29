@@ -42,23 +42,39 @@ export async function POST(req: NextRequest) {
 		});
 	}
 
-	const id = generateUID();
+	const id = await insertLink(url);
 
-	const link_data: typeof linksTable.$inferInsert = {
-		link_id: id,
-		link_url: url,
-	};
-
-	await db.insert(linksTable).values(link_data);
-
-	return Response.json({
-		id: id,
-		url: url,
-	});
+	if (typeof id === 'string') {
+		return Response.json({
+			id: id,
+			url: url,
+		});
+	} else {
+		return new Response(id.message, {
+			status: 500,
+			statusText: id.message,
+		});
+	}
 }
 
-function generateUID(): string {
-	return nanoid(7);
-	// TODO:
-	// - ID Validation -> is ID already used
+async function insertLink(url: string, attempt: number = 1): Promise<string | Error> {
+	if (attempt <= 5) return Error('Could not generate uniquie ID');
+
+	try {
+		const id = nanoid(7);
+
+		const link_data: typeof linksTable.$inferInsert = {
+			link_id: id,
+			link_url: url,
+		};
+
+		await db.insert(linksTable).values(link_data);
+		return id;
+	} catch (e: any) {
+		if (e.cause.code == '23505') {
+			return insertLink(url, attempt++);
+		} else {
+			return Error('Database Error', e.cause);
+		}
+	}
 }
