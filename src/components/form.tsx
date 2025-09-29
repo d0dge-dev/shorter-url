@@ -3,13 +3,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 export default function Form() {
 	const [url, setURLtoShorten] = useState('');
 	const [isURLvalid, setValid] = useState(false);
+	const [isLoading, setLoading] = useState(false);
 
 	async function handleURL() {
+		if (isLoading) return;
+		setLoading(true);
 		if (!isURLvalid) {
+			setLoading(false);
 			return toast.error('Please enter a valid URL');
 		}
 
@@ -38,10 +43,12 @@ export default function Form() {
 
 			if (shortned_url) {
 				await navigator.clipboard.writeText(shortned_url);
+				setLoading(false);
 				toast.success(`Shortened URL for ${target_url.join('/')} copied to clipboard!`);
 			}
 		} catch (e: any) {
 			toast.error(e.message);
+			setLoading(false);
 		}
 	}
 	return (
@@ -50,6 +57,11 @@ export default function Form() {
 				id="input_url"
 				type="url"
 				placeholder="https://google.com"
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						handleURL();
+					}
+				}}
 				onChange={(e) => {
 					let newURL: string | URL = e.target.value;
 					try {
@@ -61,8 +73,8 @@ export default function Form() {
 					setURLtoShorten(e.target.value);
 				}}
 			></Input>
-			<Button part="input_url" onClick={handleURL}>
-				Short now!
+			<Button disabled={isLoading} onClick={handleURL}>
+				{isLoading ? <Loader2 className="animate-spin" /> : 'Short now!'}
 			</Button>
 		</div>
 	);
