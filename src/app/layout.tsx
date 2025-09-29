@@ -16,8 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'URL Shortener',
-	description: 'Test Project for URL Shortener',
+	title: 'Shorter URL - cdbz.link',
+	description:
+		'Short your long URLs easily and quickly! Using our short cdbz.link domain, others will follow soon.',
+	category: 'tools',
+	metadataBase: new URL('https://cdbz.link'),
+	applicationName: 'Shorter URL',
+	authors: [{ name: 'D0dge', url: 'https://github.com/d0dge-dev' }],
 };
 
 export default function RootLayout({

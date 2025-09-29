@@ -1,4 +1,4 @@
-# Shorter URL
+# Shorter URL 🚀
 
 A simple and efficient URL shortening service built with Next.js, Drizzle ORM, and PostgreSQL. The whole purpose of this project was to learn the basics of Next.js and Drizzle ORM while creating something useful.
 
